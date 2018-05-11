@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SfySoft.MacroProcessing.Core
+namespace MacroProcessing
 {
     /// <summary>
     /// Attribute to define a method as the getter for a keyword.

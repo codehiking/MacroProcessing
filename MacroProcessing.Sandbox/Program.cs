@@ -1,8 +1,8 @@
-﻿using SfySoft.MacroProcessing.Core;
+﻿using MacroProcessing;
 using System;
 using System.Diagnostics;
 
-namespace SfySoft.MacroProcessing.Sandbox
+namespace MacroProcessing.Sandbox
 {
     class Foo
     {
@@ -17,13 +17,13 @@ namespace SfySoft.MacroProcessing.Sandbox
             Name = s;
         }
 
-        [KeywordGetter("foo")]
+        [KeywordGetter("name")]
         public string GetName()
         {
             return Name;
         }
 
-        [KeywordGetter("bar")]
+        [KeywordGetter("age")]
         public string GetAge()
         {
             return Age.ToString();
@@ -34,7 +34,7 @@ namespace SfySoft.MacroProcessing.Sandbox
     {
         static void Main(string[] args)
         {
-            Core.MacroProcessor.Register<Foo>();
+            MacroProcessor.Register<Foo>();
 
             double mSecFrequency = (Stopwatch.Frequency / 1000);
 
@@ -42,7 +42,7 @@ namespace SfySoft.MacroProcessing.Sandbox
 
             Stopwatch sw = Stopwatch.StartNew();
 
-            CompiledTemplate compiledTemplate = MacroProcessor.Compile("Hello, my name is [foo] and I'm [bar] years old");
+            CompiledTemplate compiledTemplate = MacroProcessor.Compile("Hello, my name is [name] and I'm [age] years old");
 
             Console.WriteLine($"Compilation duration : {sw.ElapsedTicks / mSecFrequency} msecs");
 
@@ -52,7 +52,7 @@ namespace SfySoft.MacroProcessing.Sandbox
 
             for (int i = 0; i < 1000 * 1000; i++)
             {
-                result = Core.MacroProcessor.Process("I'm [foo], I'm [bar] years old", new Foo(42, "Josh"));
+                result = MacroProcessor.Process("I'm [name], I'm [age] years old", new Foo(42, "Josh"));
             }
 
             Console.WriteLine($"Result: {result}");
